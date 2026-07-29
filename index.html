@@ -214,6 +214,7 @@
         <input type="hidden" name="_subject" value="New message from Project-Verse portfolio">
         <input type="hidden" name="_template" value="table">
         <input type="hidden" name="_captcha" value="false">
+        <input type="hidden" name="_next" value="https://jazzcors.github.io/Jaziz-Corsino-s-Portfolio/?sent=true#contact">
 
         <label>YOUR NAME:</label>
         <input type="text" name="name" placeholder="Your Name" required>
@@ -263,6 +264,19 @@
     }
 
     typeLoop();
+
+    // CONTACT FORM SUCCESS MESSAGE
+    if (new URLSearchParams(window.location.search).get('sent') === 'true') {
+        const form = document.querySelector('.contact-form');
+        if (form) {
+            const banner = document.createElement('div');
+            banner.className = 'form-success-banner';
+            banner.textContent = "Thanks for your message! I'll get back to you soon.";
+            form.parentNode.insertBefore(banner, form);
+        }
+        const cleanUrl = window.location.pathname + window.location.hash;
+        window.history.replaceState({}, document.title, cleanUrl);
+    }
 
     const hamburger = document.getElementById('hamburger');
     const navLinks = document.getElementById('nav-links');
